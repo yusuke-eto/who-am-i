@@ -1,19 +1,27 @@
 import React from "react";
-import { Header, Anchor, Nav, Box } from "grommet";
+import { Header, Anchor, Nav, Box, Text } from "grommet";
+import { Link, Element } from "react-scroll";
 import * as Icons from "grommet-icons";
-import headerLogo from "./header-background.jpg";
-import styled from "styled-components";
+import headerLogo from "./images/header-background.jpg";
+import styled, { keyframes } from "styled-components";
 
 const Container = styled.div`
   position: relative;
-  height: 800px;
-  min-height: 500px;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-image: url(${headerLogo});
   background-size: cover !important;
   text-align: center;
   overflow: hidden;
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 `;
 
 const Banner = styled.div`
@@ -21,7 +29,7 @@ const Banner = styled.div`
     content: "";
     display: inline-block;
     vertical-align: middle;
-    height: 150px;
+    height: 15vw;
   }
   display: inline-block;
   vertical-align: middle;
@@ -29,6 +37,7 @@ const Banner = styled.div`
   width: 85%;
   padding-bottom: 30px;
   text-align: center;
+  animation: ${fadeIn} 3s ease 0s 1 normal;
 `;
 
 const Title = styled.div`
@@ -47,47 +56,62 @@ const MyParagraph = styled.h3`
   text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
 `;
 
-export function MyHeader() {
+const FixedContent = styled.div`
+  width: 100%;
+  height: 10vh;
+  position: fixed;
+`;
+
+export const MyHeader: React.FC = () => {
   const menuLabels = ["Home", "About", "Carrer", "Works"];
 
   return (
     <Container>
-      <Header direction="row" justify="center">
-        {menuLabels.map((menuLabel) => {
-          return (
-            <Anchor
-              href="#"
-              color="light-1"
-              size="large"
-              margin="medium"
-              label={menuLabel}
-            />
-          );
-        })}
-      </Header>
-      <Banner>
-        <div className="banner-text">
-          <Title>Hello!! I'm yusuke.</Title>
-          <MyParagraph>
-            I'm a based Fukuoka. <br />I works as a software engineer.
-          </MyParagraph>
-          <ul className="social"></ul>
-        </div>
-      </Banner>
-
-      <Box justify="center" direction="row">
-        <Nav
-          direction="row"
-          alignContent="center"
-          pad="medium"
-          justify="center"
-        >
-          <Anchor icon={<Icons.Github size="large" color="status-ok" />} />
-          <Anchor icon={<Icons.Twitter size="large" color="status-ok" />} />
-          <Anchor icon={<Icons.Blog size="large" color="status-ok" />} />
-          <Anchor icon={<Icons.Instagram size="large" color="status-ok" />} />
-        </Nav>
-      </Box>
+      <Element name="Home">
+        <FixedContent>
+          <Header direction="row" justify="center" margin={{ vertical: "3vh" }}>
+            {menuLabels.map((menuLabel) => {
+              return (
+                <Link
+                  activeClass="active"
+                  to={menuLabel}
+                  spy={true}
+                  smooth={true}
+                  offset={50}
+                  duration={500}
+                  delay={100}
+                >
+                  <Text color="light-1" size="large" margin="large">
+                    {menuLabel}
+                  </Text>
+                </Link>
+              );
+            })}
+          </Header>
+        </FixedContent>
+        <Banner>
+          <div className="banner-text">
+            <Title>Hello!! I'm yusuke.</Title>
+            <MyParagraph>
+              I'm a based Fukuoka. <br />I works as a software engineer.
+            </MyParagraph>
+            <ul className="social"></ul>
+          </div>
+        </Banner>
+        <Box justify="center" direction="row">
+          <Nav
+            direction="row"
+            alignContent="center"
+            pad="medium"
+            justify="center"
+          >
+            <Anchor icon={<Icons.Github size="large" color="status-ok" />} />
+            <Anchor icon={<Icons.Twitter size="large" color="status-ok" />} />
+            <Anchor icon={<Icons.Blog size="large" color="status-ok" />} />
+            <Anchor icon={<Icons.Instagram size="large" color="status-ok" />} />
+          </Nav>
+        </Box>
+      </Element>
     </Container>
   );
-}
+};
