@@ -15,12 +15,25 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-const fadeIn = keyframes`
+const fadeInFromTop = keyframes`
   from {
     opacity: 0;
+    transform: translate3d(0, -50px, 0);
   }
   to {
     opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+`;
+
+const fadeInFromUnder = keyframes`
+  from {
+    opacity: 0;
+    transform: translate3d(0, 50px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 `;
 
@@ -37,7 +50,6 @@ const Banner = styled.div`
   width: 85%;
   padding-bottom: 30px;
   text-align: center;
-  animation: ${fadeIn} 3s ease 0s 1 normal;
 `;
 
 const Title = styled.div`
@@ -46,6 +58,7 @@ const Title = styled.div`
   letter-spacing: -2px;
   margin: 0 auto 18px auto;
   text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);
+  animation: ${fadeInFromTop} 2s ease 0s 1 normal;
 `;
 
 const MyParagraph = styled.h3`
@@ -54,6 +67,7 @@ const MyParagraph = styled.h3`
   margin: 0 auto;
   width: 70%;
   text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  animation: ${fadeInFromUnder} 2s ease 0.5s both 1 normal;
 `;
 
 const FixedContent = styled.div`
