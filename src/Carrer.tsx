@@ -13,7 +13,7 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-export function Carrer() {
+export const Carrer: React.FC = () => {
   return (
     <Container>
       <Element name="Carrer">
@@ -63,4 +63,4 @@ export function Carrer() {
       </Element>
     </Container>
   );
-}
+};
