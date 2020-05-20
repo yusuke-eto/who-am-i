@@ -119,10 +119,22 @@ export const MyHeader: React.FC = () => {
             pad="medium"
             justify="center"
           >
-            <Anchor icon={<Icons.Github size="large" color="status-ok" />} />
-            <Anchor icon={<Icons.Twitter size="large" color="status-ok" />} />
-            <Anchor icon={<Icons.Blog size="large" color="status-ok" />} />
-            <Anchor icon={<Icons.Instagram size="large" color="status-ok" />} />
+            <Anchor
+              href="https://github.com/yusuke-eto"
+              icon={<Icons.Github size="large" color="status-ok" />}
+            />
+            <Anchor
+              href="https://twitter.com/tt0km0ztm"
+              icon={<Icons.Twitter size="large" color="status-ok" />}
+            />
+            <Anchor
+              href="https://nasu-engineer.hatenablog.com/"
+              icon={<Icons.Blog size="large" color="status-ok" />}
+            />
+            <Anchor
+              href="https://www.instagram.com/nasu2568/?hl=ja"
+              icon={<Icons.Instagram size="large" color="status-ok" />}
+            />
           </Nav>
         </Box>
       </Element>
