@@ -1,8 +1,10 @@
-import React from "react";
-import { Grommet } from "grommet";
-import { MyHeader } from "./Header";
+import React, { useState } from "react";
+import { Grommet, Box } from "grommet";
+// import { MyHeader } from "./Header";
 import { About } from "./About";
 import { Carrer } from "./Carrer";
+import { Header as MyHeader } from "./Test";
+import { useTrail, animated, useTransition } from "react-spring";
 
 const theme = {
   global: {
@@ -27,6 +29,7 @@ function App() {
   return (
     <Grommet theme={theme}>
       <MyHeader />
+      {/* <MyHeader /> */}
       <About />
       <Carrer />
     </Grommet>

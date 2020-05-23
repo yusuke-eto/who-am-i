@@ -16,6 +16,7 @@ import goLogo from "./images/go.svg";
 import tsLogo from "./images/typescript.svg";
 import phpLogo from "./images/php.svg";
 import awsLogo from "./images/aws.svg";
+import VisibilitySensor from "react-visibility-sensor";
 
 const Container = styled.div`
   width: 100vw;
@@ -68,20 +69,25 @@ export const About: React.FC = () => {
               <Heading level="3" color="light-1">
                 Skills
               </Heading>
-              <Nav
-                direction="row"
-                pad="medium"
-                height="200px"
-                justify="between"
-              >
-                {Logos.map((logo) => {
-                  return (
-                    <Box width="xsmall">
-                      <Image fit="contain" src={logo} />
-                    </Box>
-                  );
-                })}
-              </Nav>
+              <VisibilitySensor>
+                {({ isVisible }) => (
+                  <Nav
+                    direction="row"
+                    pad="medium"
+                    height="200px"
+                    justify="between"
+                  >
+                    {isVisible &&
+                      Logos.map((logo) => {
+                        return (
+                          <Box width="xsmall">
+                            <Image fit="contain" src={logo} />
+                          </Box>
+                        );
+                      })}
+                  </Nav>
+                )}
+              </VisibilitySensor>
             </Box>
           </Grid>
         </Main>
