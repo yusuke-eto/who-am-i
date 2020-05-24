@@ -13,6 +13,8 @@
   }
 }
 
+@import url(//fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -70,4 +72,24 @@
   text-transform: uppercase;
   will-change: transform, opacity;
   overflow: hidden;
+}
+
+.script-bf-box {
+  width: 100px;
+  height: 300px;
+  background: black;
+  margin: 5px;
+  will-change: transform;
+}
+
+.parent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: black;
+  background: #f0f0f0;
 }
