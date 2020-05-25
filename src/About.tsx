@@ -18,10 +18,6 @@ const MobileContainer = styled.div`
   padding: 0 4vw;
 `;
 
-const IconBox = styled.div`
-  margin: 0 auto;
-`;
-
 const StyledParagraph = styled(Paragraph)`
   font-family: "Noto Sans Japanese";
   line-height: 2;
@@ -41,136 +37,167 @@ const SkillItem = styled.div`
   background-color: #f2f2f2;
 `
 
-export const About: React.FC = () => {
-  const size = useContext(ResponsiveContext);
+const MyIcon: React.FC = () => {
+  const style = {
+    margin: "0 auto"
+  };
+
+  return (
+    <div style={style}>
+      <Avatar
+        size="xlarge"
+        src="https://ca.slack-edge.com/T02D9RVN1-UAZ6SCS8Z-110785fffc90-512"
+      />
+    </div>
+  )
+};
+
+const AboutTitle: React.FC = () => {
+  return (
+    <Box
+      align="center"
+      justify="center"
+      direction="row"
+      pad={{ vertical: "7vh" }}
+    >
+      <Heading color="palevioletred" alignSelf="center">
+        ABOUT ME
+      </Heading>
+    </Box>
+  );
+}
+
+type SizeType = {
+  size: string
+}
+
+const ParagraphContainer: React.FC<SizeType> = ({size}) => {
   return (
     <>
-      { (size != 'small' && size != 'medium' ) &&
-        <Container>
-            <Box
-            align="center"
-            justify="center"
-            direction="row"
-            pad={{ vertical: "7vh" }}
-          >
-            <Heading color="palevioletred" alignSelf="center">
-              ABOUT ME
-            </Heading>
-          </Box>
-        <Box pad={{ horizontal: "7vw" }}>
-          <Grid
-            rows={["small", "small"]}
-            columns={["small", "large"]}
-            gap="small"
-            // ボックスに含まれおり、中央寄せしたい時は
-            // alignSelf で中央寄せの指定が出来る
-            alignSelf="center"
-            areas={[
-              { name: "icon", start: [0, 0], end: [0, 0] },
-              { name: "paragraph", start: [1, 0], end: [1, 0] },
-              { name: "skills", start: [0, 1], end: [1, 1] },
-            ]}
-          >
-            <Box gridArea="icon">
-              <IconBox>
-                <Avatar
-                  size="xlarge"
-                  src="https://ca.slack-edge.com/T02D9RVN1-UAZ6SCS8Z-110785fffc90-512"
-                />
-              </IconBox>
-            </Box>
-            <Box gridArea="paragraph">
-              <StyledParagraph margin="none">
-                福岡のサーバーサイドエンジニア
-                <br />
-                <br />
-                <strong>20016年:</strong>
-                就職活動をする中で、エンジニアリングに興味をもち、テックキャンプに通う
-                <br />
-                <strong>2017年:</strong>
-                福岡の勤怠管理、給与計算を制作するITベンチャーにて、
-                <br />
-                サーバーサイドエンジニアとして働く
-                <br />
-                <strong>2018年:</strong>
-                別のフィンテック系ベンチャーに転職。同じくサーバーサイドエンジニアとして働く
-              </StyledParagraph>
-            </Box>
-            <Box gridArea="skills">
-              <Box justify="center" pad={{ vertical: "5vh" }} direction="row">
-                <StyledStar color="yellow" />
-                <Heading level="3" textAlign="center" margin="none">
-                  SKILL
-                </Heading>
-              </Box>
-              <Box direction="row" justify="between" pad={{ horizontal: "10vw" }}>
-                <StyledButton color="light-2" label="Ruby" size="small" />
-                <StyledButton color="light-2" label="Javascript" size="small" />
-                <StyledButton color="light-2" label="Go" size="small" />
-                <StyledButton color="light-2" label="AWS" size="small" />
-                <StyledButton color="light-2" label="Terraform" size="small" />
-              </Box>
-            </Box>
-          </Grid>
-        </Box>
-        </Container>
-      }
       {
-        (size == 'small' || size == 'medium' ) &&
-        <MobileContainer>
-          <Box
-            align="center"
-            justify="center"
-            direction="row"
-            pad={{ vertical: "7vh" }}
-          >
-            <Heading color="palevioletred" alignSelf="center">
-              ABOUT ME
-            </Heading>
-          </Box>
-          <Box>
-            <IconBox>
-              <Avatar
-                size="xlarge"
-                src="https://ca.slack-edge.com/T02D9RVN1-UAZ6SCS8Z-110785fffc90-512"
-              />
-            </IconBox>
-          </Box>
-          <div>
-            <StyledParagraph margin="none">
-              福岡のサーバーサイドエンジニア
-              <br />
-              <br />
-              <strong>20016年</strong>
-              <br />
-              就職活動をする中で、エンジニアリングに興味をもち、テックキャンプに通う
-              <br />
-              <strong>2017年</strong>
-              <br />
-              福岡の勤怠管理、給与計算を制作するITベンチャーにて、
-              サーバーサイドエンジニアとして働く
-              <br />
-              <strong>2018年</strong>
-              <br />
-              別のフィンテック系ベンチャーに転職。同じくサーバーサイドエンジニアとして働く
-            </StyledParagraph>
-          </div>
-          <Box>
-              <Box justify="center" pad={{ vertical: "5vh" }} direction="row">
-                <StyledStar color="yellow" />
-                <Heading level="3" textAlign="center" margin="none">
-                  SKILL
-                </Heading>
-              </Box>
-              <Box direction="row" justify="between" pad={{ horizontal: "10vw" }}>
-                <SkillItem>Ruby</SkillItem>
-                <SkillItem>Javascript</SkillItem>
-                <SkillItem>Go</SkillItem>
-                <SkillItem>AWS</SkillItem>
-                <SkillItem>Terraform</SkillItem>
-              </Box>
-          </Box>
-        </MobileContainer>
+        (size != 'small' && size != 'medium') ? (
+          <StyledParagraph margin="none">
+            福岡のサーバーサイドエンジニア
+            <br />
+            <br />
+            <strong>20016年:</strong>
+            就職活動をする中で、エンジニアリングに興味をもち、テックキャンプに通う
+            <br />
+            <strong>2017年:</strong>
+            福岡の勤怠管理、給与計算を制作するITベンチャーにて、
+            <br />
+            サーバーサイドエンジニアとして働く
+            <br />
+            <strong>2018年:</strong>
+            別のフィンテック系ベンチャーに転職。同じくサーバーサイドエンジニアとして働く
+          </StyledParagraph>
+        ) : (
+          <StyledParagraph margin="none">
+            福岡のサーバーサイドエンジニア
+            <br />
+            <br />
+            <strong>20016年</strong>
+            <br />
+            就職活動をする中で、エンジニアリングに興味をもち、テックキャンプに通う
+            <br />
+            <strong>2017年</strong>
+            <br />
+            福岡の勤怠管理、給与計算を制作するITベンチャーにて、
+            サーバーサイドエンジニアとして働く
+            <br />
+            <strong>2018年</strong>
+            <br />
+            別のフィンテック系ベンチャーに転職。同じくサーバーサイドエンジニアとして働く
+          </StyledParagraph>
+        )
+      }
+    </>
+  );
+}
+
+const Skills: React.FC<SizeType> = ({size}) => {
+  return (
+    <>
+      <Box justify="center" pad={{ vertical: "5vh" }} direction="row">
+      <StyledStar color="yellow" />
+      <Heading level="3" textAlign="center" margin="none">
+        SKILL
+      </Heading>
+      </Box>
+      <Box direction="row" justify="between" pad={{ horizontal: "10vw" }}>
+        {
+          (size != 'small' && size != 'medium') ? (
+            <>
+              <StyledButton color="light-2" label="Ruby" size="small" />
+              <StyledButton color="light-2" label="Javascript" size="small" />
+              <StyledButton color="light-2" label="Go" size="small" />
+              <StyledButton color="light-2" label="AWS" size="small" />
+              <StyledButton color="light-2" label="Terraform" size="small" />
+            </>
+          ) : (
+            <>
+              <SkillItem>Ruby</SkillItem>
+              <SkillItem>Javascript</SkillItem>
+              <SkillItem>Go</SkillItem>
+              <SkillItem>AWS</SkillItem>
+              <SkillItem>Terraform</SkillItem>
+            </>
+          )
+        }
+      </Box>
+    </>
+  )
+}
+
+export const About: React.FC = () => {
+  const size = useContext(ResponsiveContext);
+
+  return (
+    <>
+      { 
+        (size != 'small' && size != 'medium' ) ? (
+          <Container>
+            <AboutTitle />
+            <Box pad={{ horizontal: "7vw" }}>
+              <Grid
+                rows={["small", "small"]}
+                columns={["small", "large"]}
+                gap="small"
+                // ボックスに含まれおり、中央寄せしたい時は
+                // alignSelf で中央寄せの指定が出来る
+                alignSelf="center"
+                areas={[
+                  { name: "icon", start: [0, 0], end: [0, 0] },
+                  { name: "paragraph", start: [1, 0], end: [1, 0] },
+                  { name: "skills", start: [0, 1], end: [1, 1] },
+                ]}
+              >
+                <Box gridArea="icon">
+                  <MyIcon />
+                </Box>
+                <Box gridArea="paragraph">
+                  <ParagraphContainer size={size} />
+                </Box>
+                <Box gridArea="skills">
+                  <Skills size={size} />
+                </Box>
+              </Grid>
+            </Box>
+          </Container>
+        ) : (
+          <MobileContainer>
+            <AboutTitle />
+            <Box>
+              <MyIcon />
+            </Box>
+            <div>
+              <ParagraphContainer size={size}/>
+            </div>
+            <Box>
+              <Skills size={size} />
+            </Box>
+          </MobileContainer>
+        )
       }
       {/* </Element> */}
     </>
