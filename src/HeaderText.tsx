@@ -1,12 +1,24 @@
 import React, { useState } from "react";
 import { animated, useTrail } from "react-spring";
-import "./App.css";
+import styled from "styled-components";
+import "./index.css";
 
 const items = ["Hello", "This", "is", "yusuke"];
 const config = { mass: 5, tension: 2000, friction: 200 };
 
-export const HeaderText = () => {
-  const [toggle, set] = useState(true);
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const HeaderText: React.FC = () => {
+  const [toggle, set] = useState<Boolean>(true);
   const trail = useTrail(items.length, {
     config,
     opacity: toggle ? 1 : 0,
@@ -16,7 +28,7 @@ export const HeaderText = () => {
   });
 
   return (
-    <div className="trails-main" onClick={() => set(!toggle)}>
+    <Container onClick={() => set(!toggle)}>
       <div>
         {trail.map(({ x, height, ...rest }: any, index) => (
           <animated.div
@@ -31,6 +43,6 @@ export const HeaderText = () => {
           </animated.div>
         ))}
       </div>
-    </div>
+    </Container>
   );
 };

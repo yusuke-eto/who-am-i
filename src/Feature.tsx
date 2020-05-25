@@ -3,7 +3,6 @@ import { Heading, Box, Grid, Text, Paragraph, ResponsiveContext } from "grommet"
 import { Star } from "grommet-icons";
 import { GiDiscussion, GiStairsGoal } from "react-icons/gi";
 import styled from "styled-components";
-import "./App.css";
 
 const Container = styled(Box)`
   width: 100vw;

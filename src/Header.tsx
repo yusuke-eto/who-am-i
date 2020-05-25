@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { useSpring, animated } from "react-spring";
 import { HeaderText } from "./HeaderText";
 import styled from "styled-components";
-import "./App.css";
+import "./index.css";
 
 const Container = styled.div`
   width: 100vw;
@@ -11,7 +11,7 @@ const Container = styled.div`
   position: relative;
 `;
 
-export const Header = () => {
+export const Header: React.FC = () => {
   const props = useSpring({
     from: {
       left: "0%",
