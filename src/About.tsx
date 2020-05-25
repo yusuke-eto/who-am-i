@@ -52,18 +52,29 @@ const MyIcon: React.FC = () => {
   )
 };
 
-const AboutTitle: React.FC = () => {
+type TAbountTitle = {
+  isVisible?: boolean
+}
+
+const AboutTitle: React.FC<TAbountTitle> = ({isVisible = true}) => {
   return (
-    <Box
-      align="center"
-      justify="center"
-      direction="row"
-      pad={{ vertical: "7vh" }}
-    >
-      <Heading color="palevioletred" alignSelf="center">
-        ABOUT ME
-      </Heading>
-    </Box>
+    <div style={{height: "28vh"}}>
+      {
+        isVisible &&  (
+          <Box
+            align="center"
+            justify="center"
+            direction="row"
+            pad={{ vertical: "7vh" }}
+            animation={isVisible ? { type: "slideUp", size: "large" } : undefined}
+          >
+            <Heading color="palevioletred" alignSelf="center">
+              ABOUT ME
+            </Heading>
+          </Box>
+        )
+      }
+    </div>
   );
 }
 
@@ -156,50 +167,70 @@ export const About: React.FC = () => {
     <>
       { 
         (size != 'small' && size != 'medium' ) ? (
-          <Container>
-            <AboutTitle />
-            <Box pad={{ horizontal: "7vw" }}>
-              <Grid
-                rows={["small", "small"]}
-                columns={["small", "large"]}
-                gap="small"
-                // ボックスに含まれおり、中央寄せしたい時は
-                // alignSelf で中央寄せの指定が出来る
-                alignSelf="center"
-                areas={[
-                  { name: "icon", start: [0, 0], end: [0, 0] },
-                  { name: "paragraph", start: [1, 0], end: [1, 0] },
-                  { name: "skills", start: [0, 1], end: [1, 1] },
-                ]}
-              >
-                <Box gridArea="icon">
-                  <MyIcon />
-                </Box>
-                <Box gridArea="paragraph">
-                  <ParagraphContainer size={size} />
-                </Box>
-                <Box gridArea="skills">
-                  <Skills size={size} />
-                </Box>
-              </Grid>
-            </Box>
-          </Container>
+          <VisibilitySensor partialVisibility={true} offset={{top: 100, bottom: 200}} >
+            {({isVisible}) => 
+              <Container>
+              <AboutTitle isVisible={isVisible}/>
+                <>
+                  { isVisible && (
+                    <Box pad={{ horizontal: "7vw" }} animation={{ type: "slideUp", size: "large" }} >
+                      <Grid
+                        rows={["small", "small"]}
+                        columns={["small", "large"]}
+                        gap="small"
+                        // ボックスに含まれおり、中央寄せしたい時は
+                        // alignSelf で中央寄せの指定が出来る
+                        alignSelf="center"
+                        areas={[
+                          { name: "icon", start: [0, 0], end: [0, 0] },
+                          { name: "paragraph", start: [1, 0], end: [1, 0] },
+                          { name: "skills", start: [0, 1], end: [1, 1] },
+                        ]}
+                      >
+                        <Box gridArea="icon">
+                          <MyIcon />
+                        </Box>
+                        <Box gridArea="paragraph">
+                          <ParagraphContainer size={size} />
+                        </Box>
+                        <Box gridArea="skills">
+                          <Skills size={size} />
+                        </Box>
+                      </Grid>
+                    </Box>
+                  )}
+                </>
+              </Container>
+            }
+          </VisibilitySensor>
         ) : (
           <MobileContainer>
             <AboutTitle />
-            <Box>
-              <MyIcon />
-            </Box>
-            <div>
-              <ParagraphContainer size={size}/>
-            </div>
-            <Box>
-              <Skills size={size} />
-            </Box>
+            <VisibilitySensor>
+              {
+                ({isVisible}) =>
+                <>
+                  {
+                    true && (
+                      <>
+                        <Box>
+                          <MyIcon />
+                        </Box>
+                        <div>
+                          <ParagraphContainer size={size}/>
+                        </div>
+                        <Box>
+                          <Skills size={size} />
+                        </Box>
+                      </>
+                    )
+                  }
+                </>
+              }
+            </VisibilitySensor>
           </MobileContainer>
         )
       }
-      {/* </Element> */}
     </>
   );
 };
