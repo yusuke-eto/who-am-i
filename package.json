@@ -13,6 +13,7 @@
     "@types/react-scroll": "^1.5.5",
     "@types/react-visibility-sensor": "^5.0.1",
     "@types/styled-components": "^5.1.0",
+    "d3-ease": "^1.0.6",
     "gh-pages": "^2.2.0",
     "grommet": "^2.13.0",
     "grommet-icons": "^4.4.0",

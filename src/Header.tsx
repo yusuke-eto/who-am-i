@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { useSpring, animated } from "react-spring";
 import { HeaderText } from "./HeaderText";
 import styled from "styled-components";
+import { easeCubicOut } from "d3-ease";
 import "./index.css";
 
 const Container = styled.div`
@@ -12,6 +13,14 @@ const Container = styled.div`
 `;
 
 export const Header: React.FC = () => {
+  const ballProps = useSpring({
+    from: { left: "100px", top: "90vh" },
+    to: async (next, cancel) => {
+      await next({ left: "300px", top: "10vh" });
+      await next({ left: "600px", top: "90vh" });
+    },
+    config: { easing: (t) => easeCubicOut(t), friction: 50 },
+  });
   const props = useSpring({
     from: {
       left: "0%",
@@ -65,6 +74,9 @@ export const Header: React.FC = () => {
     <Container>
       <animated.div className="script-box" style={props}>
         <HeaderText />
+        <div className="shape-container">
+          <div className="shape a"></div>
+        </div>
       </animated.div>
     </Container>
   );
