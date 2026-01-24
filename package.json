@@ -16,7 +16,7 @@
     "gh-pages": "^2.2.0",
     "grommet": "^2.13.0",
     "grommet-icons": "^4.4.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.23",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
